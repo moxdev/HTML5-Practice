@@ -1,7 +1,6 @@
 /*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
 
 html {
-    color: #222;
     font-size: 13px;
     line-height: 1.4;
 }
@@ -83,19 +82,14 @@ ul, ol {
     margin-bottom: 20px;
 }
 
-#main-header {
-    padding: 0;
-    color: white;
-}
-
 #branding {
     float: left;
     width: 50%;
 }
 
 #branding h1 {
-    padding: 5 0 0  70px;
-    color: #ffff;
+    padding: 5px 0 0 70px;
+    color: #fff;
     margin: 0 !important;
 }
 
@@ -112,11 +106,13 @@ ul, ol {
 }
 
 #main-nav ul {
-
+    float: right;
 }
+
 #main-nav li {
     float: left;
     padding: 3px 5px 0 5px;
+    margin: 0 15px;
     font-size: 15px;
     text-transform: uppercase;
     font-weight: bold;
@@ -158,6 +154,10 @@ article .meta {
 
 }
 
+article .meta  span {
+    float: right;
+}
+
 article .readmore {
     background: #f4f4f4;
     color: #000;
@@ -194,6 +194,7 @@ article .readmore:hover {
 .search input[type="image"] {
     width: 10%;
     float: right;
+}
 
 #sub-nav {
     padding: 20px 0 20px 0;
@@ -204,6 +205,7 @@ article .readmore:hover {
     font-weight: bold;
     padding: 5px 0 5px 0;
     border-bottom: dotted 1px #333;
+    list-style: none;
 }
 
 #sub-nav a {
@@ -218,6 +220,43 @@ article .readmore:hover {
     width: 100%;
 }
 
+#main-footer {
+    background: #333;
+    color: #fff;
+    min-height: 180px;
+    margin-top: 20px;
+    overflow: auto;
+}
+
+#main-footer a {
+    color: #fff;
+}
+
+#main-footer .copy {
+    padding: 20px 0 0 0;
+}
+
+#main-footer .footer-left {
+    float: left;
+}
+
+#main-footer .footer-right {
+    float: right;
+    width: 70%;
+}
+
+#main-footer .footer-nav {
+    float: left;
+    font-size: 15px;
+    width: 31%;
+    padding: 20px 0 20px 0;
+    margin-right: 10px;
+}
+
+#main-footer .footer-nav li {
+    padding: 5px 0 5px 0;
+    border-bottom: dotted #666 1px;
+}
 
 /* ==========================================================================
    Media Queries
