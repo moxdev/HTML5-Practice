@@ -1,66 +1,83 @@
+/*
+Loop through all 'tags' from html 'li > data-tags' in '#gallery'
+and create a new unordered list for the different categories
+and dynamically creates the 'navbar' (see html no links in navbar)
+*/
+
 $(document).ready(function(){
-	var items = $('#gallery li'),
-		itemsByTags = {};
-		
-	//Loop through tags
-	items.each(function(i){
-		var elem = $(this),
-		tags = elem.data('tags').split(',');
-		
-		//Add data attribute for quicksand
-		elem.attr('data-id',i);
-		
-		$.each(tags,function(key,value){
-			//Remove whitespace
-			value = $.trim(value);
-			
+	var items = $('#gallery li');
+	// save '#gallery li' into variable
+
+	var itemsByTags = {};
+	// and create an empty array
+
+	// FUNCTION: loop through tags and add image to array
+	items.each(function(i) {
+		var element = $(this);
+		// element = 'this' which refers to the element it is currently on
+		var tags = element.data('tags').split(',');
+		// tags = the html data 'tags' and splits them with a ,
+
+		element.attr('data-id', i);
+		// adds the attribute 'data-id' for i (i=this) - this is for quicksand js
+
+		$.each(tags,function(key,value) {
+			var value = $.trim(value);
+			// trims off white space
+
 			if(!(value in itemsByTags)){
-				//Add empty value
 				itemsByTags[value] = [];
+				// if value is not in 'itemsByTags' add empty value
 			}
-			
-			//Add image to array
-			itemsByTags[value].push(elem);
+			itemsByTags[value].push(element);
+			// adds image to the array
+
 		});
 	});
-	
-	//Create "All Items" option
-	createList('All Items',items);
-	
-	$.each(itemsByTags, function(k, v){
-		createList(k, v);
+// =================================
+	createList('All Items', items);
+	// creates 'All Items' option for displaying all images
+
+	$.each(itemsByTags, function(key, value) {
+		createList(key,value);
+		// creates all of the category options
 	});
-	
-	//Click Handler
-	$('#navbar a').live('click', function(e){
+
+//=======Click Handler==============================
+	$('#navbar a').on('click', function(e){
+		// on-click of navbar link add event handler
 		var link = $(this);
-		
-		//Add active class
+		// link = this
+
 		link.addClass('active').siblings().removeClass('active');
-		
+		// adds active class to 'navbar a' and removes active class from any other link
+
 		$('#gallery').quicksand(link.data('list').find('li'));
-		e.preventDefault();
+			e.preventDefault();
+		// tells QuicksandJS to find all 'li' in '#gallery'
+		// preventDefault stops it from following through until clicked
+
 	});
-	
+
+// clicks the first link 'All Items' automatically so it will be active when site is first visited
 	$('#navbar a:first').click();
-	
-	//Create the lists
-	function createList(text,items){
-		//Create empty ul
-		var ul = $('<ul>',{'class':'hidden'});
-		
-		$.each(items, function(){
+
+// createList Function:
+	function createList(text,items) {
+		var ul = $('<ul>', {'class':'hidden'});
+		// creates a hidden empty 'ul' div
+
+		$.each(items, function() {
 			$(this).clone().appendTo(ul)
 		});
-		
-		//Add gallery div
-		ul.appendTo('#gallery');
-		
-		//Create menu item
-		var a = $('<a>',{
+		// loops through and 'clones' the 'ul' then appends it back to the 'ul'
+
+		var a = $('<a>', {
 			html:text,
 			href:'#',
 			data:{list:ul}
 		}).appendTo('#navbar');
-	}
+		// appends new 'a' to '#navbar'
+	};
+
 });
